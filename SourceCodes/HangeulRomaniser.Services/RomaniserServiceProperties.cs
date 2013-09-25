@@ -70,10 +70,10 @@ namespace HangeulRomaniser.Services
                                                                 new KeyValuePair<char, string>('ㄹ', "l"),
                                                                 new KeyValuePair<char, string>('ㄺ', "k"),
                                                                 new KeyValuePair<char, string>('ㄻ', "m"),
-                                                                new KeyValuePair<char, string>('ㄼ', "p"),
+                                                                new KeyValuePair<char, string>('ㄼ', "l"),
                                                                 new KeyValuePair<char, string>('ㄽ', "l"),
                                                                 new KeyValuePair<char, string>('ㄾ', "l"),
-                                                                new KeyValuePair<char, string>('ㄿ', "l"),
+                                                                new KeyValuePair<char, string>('ㄿ', "p"),
                                                                 new KeyValuePair<char, string>('ㅀ', "l"),
                                                                 new KeyValuePair<char, string>('ㅁ', "m"),
                                                                 new KeyValuePair<char, string>('ㅂ', "p"),
@@ -86,7 +86,7 @@ namespace HangeulRomaniser.Services
                                                                 new KeyValuePair<char, string>('ㅋ', "k"),
                                                                 new KeyValuePair<char, string>('ㅌ', "t"),
                                                                 new KeyValuePair<char, string>('ㅍ', "p"),
-                                                                new KeyValuePair<char, string>('ㅎ', "h")
+                                                                new KeyValuePair<char, string>('ㅎ', "t")
                                                             };
 
         #endregion Properties
