@@ -9,10 +9,10 @@
 
 # How It Works #
 
-According to the Unicode table, all Hangeul syllables, initials, medials and finals are listed in an alphabetical order ([Hangul Syllables][hangeul_syllables] and [Hangul Jamo][hangeul_jamo]). So the distance between the initial and the final of a letter can be calculated and its result is used to combine initial, medial and final. In addition to this, by using this approach, a complete syllable can be divided into three distinctive segments &ndash; initial, medial and final. Each segment has its corresponding Romanised alphabet, so splitting a syllable into segments can Romanise the syllable.
+The Unicode table lists all Korean syllables, initials, medials and finals in an alphabetical order ([Hangul Syllables][hangeul_syllables] and [Hangul Jamo][hangeul_jamo]). [A sort of rules (written in Korean)][rule] is applied to them and using those rules can calculate distance between an initial and a final. The distance determines a unicode of a syllable combined with given initial, medial and final and vice versa. Each character &ndash; initial, medial and final &ndash; has its corresponding Romanised equivalent, so combining those equivalent can generate a Romanised string of a Korean syllable.
 
 
-유니코드 테이블에 보면 모든 한글 음절, 초성, 중성, 종성들은 가나다 순서로 되어 있습니다. ([한글음절][hangeul_syllables], [한글자모][hangeul_jamo] 참조). 따라서, 한 음절의 초성과 종성 사이의 거리를 계산해낼 수 있기 때문에, 초성, 중성, 종성이 주어지면 이들을 결합하여 해당하는 유니코드 테이블에서 찾을 수 있게 됩니다. 이 방법을 이용하면 마찬가지로 한 음절을 초성, 중성, 종성으로 나눌 수도 있게 됩니다. 초성, 중성, 종성은 각각 로마자 표기규정이 있기 때문에 이들을 조합하면 하나의 음절을 로마자로 변환시킬 수 있게 됩니다.
+유니코드 테이블에 보면 모든 한글 음절과 초성, 중성, 종성들은 가나다 순서로 되어 있습니다. ([한글음절][hangeul_syllables], [한글자모][hangeul_jamo] 참조) 또한 이 순서는 [모종의 규칙(한글)][rule]에 따라 이루어져 있고, 그 규칙을 따르면 한 음절의 초성과 종성 사이의 거리를 계산해 낼 수 있습니다. 이 방법을 이용하면 초성, 중성, 종성이 주어질 때 이들을 결합하여 해당 음절을 유니코드에서 찾아낼 수 있고, 그 반대도 가능합니다. 초성, 중성, 종성은 각각 로마자 표기규정이 있어 이들을 조합하면 하나의 음절을 로마자로 변환시킬 수 있습니다.
 
 
 
@@ -85,3 +85,4 @@ According to the Unicode table, all Hangeul syllables, initials, medials and fin
 [2]: http://www.korean.go.kr/09_new/dic/rule/rule_roman_0101.jsp
 [hangeul_syllables]: http://www.unicode.org/charts/PDF/UAC00.pdf
 [hangeul_jamo]: http://www.unicode.org/charts/PDF/U1100.pdf
+[rule]: http://helloworld.naver.com/helloworld/76650
