@@ -67,6 +67,20 @@ namespace HangeulRomaniser.Services.Interfaces
         /// <returns>Returns the list of letters romanised.</returns>
         IList<string> RomaniseInBulk(IList<string> list, string delimiter = " ");
 
+        /// <summary>
+        /// Reads a text file that contains the list of Hangeul letters.
+        /// </summary>
+        /// <param name="filepath">Full file path.</param>
+        /// <returns>Returns the list of letters.</returns>
+        IList<string> ReadFile(string filepath);
+
+        /// <summary>
+        /// Saves the output to a given file path.
+        /// </summary>
+        /// <param name="filepath">Full file path.</param>
+        /// <param name="results">List of outputs.</param>
+        void SaveFile(string filepath, IList<string> results);
+
         #endregion Methods
     }
 }

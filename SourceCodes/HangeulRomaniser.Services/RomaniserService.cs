@@ -1,7 +1,9 @@
 ﻿using HangeulRomaniser.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace HangeulRomaniser.Services
 {
@@ -189,7 +191,7 @@ namespace HangeulRomaniser.Services
             indexUnicode = indexUnicode % 28;
             var indexFinal = indexUnicode;
 
-            var result = new List<int>() {indexInitial, indexMedial, indexFinal};
+            var result = new List<int>() { indexInitial, indexMedial, indexFinal };
             return result;
         }
 
@@ -201,9 +203,37 @@ namespace HangeulRomaniser.Services
         /// <returns>Returns the list of letters romanised.</returns>
         public IList<string> RomaniseInBulk(IList<string> list, string delimiter = " ")
         {
-            var results = list.Select(p => this.Romanise(p, delimiter))
+            var results = list.Select(p => String.Format("{0}\t{1}", p, this.Romanise(p, delimiter)))
                               .ToList();
             return results;
+        }
+
+        /// <summary>
+        /// Reads a text file that contains the list of Hangeul letters.
+        /// </summary>
+        /// <param name="filepath">Full file path.</param>
+        /// <returns>Returns the list of letters.</returns>
+        public IList<string> ReadFile(string filepath)
+        {
+            var results = File.ReadAllLines(filepath).ToList();
+            return results;
+        }
+
+        /// <summary>
+        /// Saves the output to a given file path.
+        /// </summary>
+        /// <param name="filepath">Full file path.</param>
+        /// <param name="results">List of outputs.</param>
+        public void SaveFile(string filepath, IList<string> results)
+        {
+            using (var stream = new FileStream(filepath, FileMode.Create, FileAccess.Write))
+            using (var writer = new StreamWriter(stream, Encoding.Unicode))
+            {
+                foreach (var result in results)
+                {
+                    writer.WriteLine(result);
+                }
+            }
         }
 
         #endregion Methods
