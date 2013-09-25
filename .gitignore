@@ -56,6 +56,7 @@ ipch/
 _ReSharper*
 
 # NCrunch
+_NCrunch_*
 *.ncrunch*
 .*crunch*.local.xml
 
@@ -77,9 +78,10 @@ publish
 
 # Publish Web Output
 *.Publish.xml
+*.pubxml
 
 # NuGet Packages Directory
-packages
+#packages
 
 # Windows Azure Build Output
 csx
