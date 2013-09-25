@@ -92,7 +92,7 @@ namespace HangeulRomaniser.Services
         /// </summary>
         /// <param name="letter">Letter to split.</param>
         /// <returns>Returns the initial, medial and final.</returns>
-        public IList<string> Split(string letter)
+        public IList<string> Split(char letter)
         {
             var indices = this.GetIndices(letter);
             if (indices == null || !indices.Any())
@@ -109,9 +109,24 @@ namespace HangeulRomaniser.Services
         /// <summary>
         /// Romanises the letter.
         /// </summary>
+        /// <param name="letters">Letters to romanise.</param>
+        /// <param name="delimiter">Delimiter for letter.</param>
+        /// <returns>Returns the letter romanised.</returns>
+        public string Romanise(string letters, string delimiter = " ")
+        {
+            var results = letters.ToCharArray()
+                                 .Select(p => this.Romanise(p))
+                                 .Where(p => !String.IsNullOrWhiteSpace(p))
+                                 .ToList();
+            return String.Join(delimiter, results);
+        }
+
+        /// <summary>
+        /// Romanises the letter.
+        /// </summary>
         /// <param name="letter">Letter to romanise.</param>
         /// <returns>Returns the letter romanised.</returns>
-        public string Romanise(string letter)
+        public string Romanise(char letter)
         {
             var indices = this.GetIndices(letter);
             if (indices == null || !indices.Any())
@@ -130,11 +145,42 @@ namespace HangeulRomaniser.Services
         /// </summary>
         /// <param name="letter">Letter to get indices.</param>
         /// <returns>Returns the indices.</returns>
-        private IList<int> GetIndices(string letter)
+        private IList<int> GetIndices(char letter)
         {
-            var unicode = Convert.ToUInt16(Convert.ToChar(letter));
+            var unicode = Convert.ToUInt16(letter);
+            //  Checks whether the given letter belongs to Hangeul unicode range.
             if (unicode < FIRST_HANGEUL_UNICODE || unicode > LAST_HANGEUL_UNICODE)
+            {
+                //  Checks the given letter only contains initial.
+                //  If so, it appends medial of "ㅡ" and return the result.
+                if (this.Initials.Select(p => p.Key).Contains(Convert.ToChar(letter)))
+                {
+                    var initial = Convert.ToString(this.Initials.Single(p => p.Key == Convert.ToChar(letter)).Key);
+                    letter = Convert.ToChar(this.Combine(initial, "ㅡ", String.Empty));
+                    return this.GetIndices(letter);
+                }
+
+                //  Checks the given letter only contains initial.
+                //  If so, it prepends initial of "ㅇ" and return the result.
+                if (this.Medials.Select(p => p.Key).Contains(Convert.ToChar(letter)))
+                {
+                    var medial = Convert.ToString(this.Medials.Single(p => p.Key == Convert.ToChar(letter)).Key);
+                    letter = Convert.ToChar(this.Combine("ㅇ", medial, String.Empty));
+                    return this.GetIndices(letter);
+                }
+
+                //  Checks the given letter only contains initial.
+                //  If so, it prepends initial of "ㅇ" and medial of "ㅡ" and return the result.
+                if (this.Finals.Select(p => p.Key).Contains(Convert.ToChar(letter)))
+                {
+                    var final = Convert.ToString(this.Finals.Single(p => p.Key == Convert.ToChar(letter)).Key);
+                    letter = Convert.ToChar(this.Combine("ㅇ", "ㅡ", final));
+                    return this.GetIndices(letter);
+                }
+
+                //  Returns NULL, if any of above is applied.
                 return null;
+            }
 
             var indexUnicode = unicode - FIRST_HANGEUL_UNICODE;
             var indexInitial = indexUnicode / (21 * 28);

@@ -42,14 +42,22 @@ namespace HangeulRomaniser.Services.Interfaces
         /// </summary>
         /// <param name="letter">Letter to split.</param>
         /// <returns>Returns the initial, medial and final.</returns>
-        IList<string> Split(string letter);
+        IList<string> Split(char letter);
+
+        /// <summary>
+        /// Romanises the letter.
+        /// </summary>
+        /// <param name="letters">Letters to romanise.</param>
+        /// <param name="delimiter">Delimiter for letter.</param>
+        /// <returns>Returns the letter romanised.</returns>
+        string Romanise(string letters, string delimiter = " ");
 
         /// <summary>
         /// Romanises the letter.
         /// </summary>
         /// <param name="letter">Letter to romanise.</param>
         /// <returns>Returns the letter romanised.</returns>
-        string Romanise(string letter);
+        string Romanise(char letter);
 
         #endregion Methods
     }
