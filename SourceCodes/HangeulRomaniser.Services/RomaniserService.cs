@@ -193,6 +193,19 @@ namespace HangeulRomaniser.Services
             return result;
         }
 
+        /// <summary>
+        /// Romanises list of letters in bulk.
+        /// </summary>
+        /// <param name="list">List of letters.</param>
+        /// <param name="delimiter">Delimiter for letter.</param>
+        /// <returns>Returns the list of letters romanised.</returns>
+        public IList<string> RomaniseInBulk(IList<string> list, string delimiter = " ")
+        {
+            var results = list.Select(p => this.Romanise(p, delimiter))
+                              .ToList();
+            return results;
+        }
+
         #endregion Methods
     }
 }

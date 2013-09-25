@@ -59,6 +59,14 @@ namespace HangeulRomaniser.Services.Interfaces
         /// <returns>Returns the letter romanised.</returns>
         string Romanise(char letter);
 
+        /// <summary>
+        /// Romanises list of letters in bulk.
+        /// </summary>
+        /// <param name="list">List of letters.</param>
+        /// <param name="delimiter">Delimiter for letter.</param>
+        /// <returns>Returns the list of letters romanised.</returns>
+        IList<string> RomaniseInBulk(IList<string> list, string delimiter = " ");
+
         #endregion Methods
     }
 }
