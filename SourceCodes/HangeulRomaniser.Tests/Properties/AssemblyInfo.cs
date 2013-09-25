@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HangeulRomaniser.Services")]
-[assembly: AssemblyDescription("This provides Romaniser services.")]
+[assembly: AssemblyTitle("HangeulRomaniser.Tests")]
+[assembly: AssemblyDescription("This provides classes and methods for test Hangeul Romaniser Service.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("HangeulRomaniser.Services")]
+[assembly: AssemblyProduct("HangeulRomaniser.Tests")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -17,4 +17,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4611a0dc-e1e2-435d-99c6-c6bd6614e9d0")]
+[assembly: Guid("d582294f-6651-40d1-ab17-7e21e84f962b")]

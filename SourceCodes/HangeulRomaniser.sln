@@ -3,6 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangeulRomaniser.Services", "HangeulRomaniser.Services\HangeulRomaniser.Services.csproj", "{0AA1463C-0FF8-4FBB-A17C-CEB9DE051E41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangeulRomaniser.Tests", "HangeulRomaniser.Tests\HangeulRomaniser.Tests.csproj", "{FE8E8426-55B3-4B2C-88B0-C0D6A77D6A25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{943D2018-7CEA-4F15-9087-937A13FFB87A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{5F975E26-8D49-4937-B57D-D8C308EFB4AC}"
+	ProjectSection(SolutionItems) = preProject
+		..\Documents\Properties\CommonAssemblyInfo.cs = ..\Documents\Properties\CommonAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EE32A123-33E8-45E1-9BB0-281CB9EF968E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,8 +27,15 @@ Global
 		{0AA1463C-0FF8-4FBB-A17C-CEB9DE051E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA1463C-0FF8-4FBB-A17C-CEB9DE051E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA1463C-0FF8-4FBB-A17C-CEB9DE051E41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8E8426-55B3-4B2C-88B0-C0D6A77D6A25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8E8426-55B3-4B2C-88B0-C0D6A77D6A25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8E8426-55B3-4B2C-88B0-C0D6A77D6A25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8E8426-55B3-4B2C-88B0-C0D6A77D6A25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F975E26-8D49-4937-B57D-D8C308EFB4AC} = {943D2018-7CEA-4F15-9087-937A13FFB87A}
 	EndGlobalSection
 EndGlobal
