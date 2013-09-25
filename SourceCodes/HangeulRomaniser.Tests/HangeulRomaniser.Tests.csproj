@@ -70,6 +70,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HangeulRomaniser.Services\HangeulRomaniser.Services.csproj">
+      <Project>{0aa1463c-0ff8-4fbb-a17c-ceb9de051e41}</Project>
+      <Name>HangeulRomaniser.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
