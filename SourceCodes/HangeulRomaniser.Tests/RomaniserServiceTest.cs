@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HangeulRomaniser.Services;
+﻿using HangeulRomaniser.Services;
 using NUnit.Framework;
 
 namespace HangeulRomaniser.Tests
@@ -23,10 +19,9 @@ namespace HangeulRomaniser.Tests
         [TestFixtureTearDown]
         public void Dispose()
         {
-            
         }
 
-        #endregion
+        #endregion SetUp / TearDown
 
         #region Tests
 
@@ -71,6 +66,30 @@ namespace HangeulRomaniser.Tests
             Assert.AreEqual(expected, result);
         }
 
-        #endregion
+        [Test]
+        [TestCase("감", "gam")]
+        [TestCase("나", "na")]
+        [TestCase("굶", "gum")]
+        [TestCase("뚝", "ttuk")]
+        [TestCase("쀓", "ppwel")]
+        [TestCase("괜", "gwaen")]
+        [TestCase("오", "o")]
+        public void RomaniseLetter_GetLetter_LetterRomanised(string letter, string romanised)
+        {
+            var result = this._service.Romanise(letter);
+
+            Assert.AreEqual(romanised, result);
+        }
+
+        [Test]
+        [TestCase("g", null)]
+        public void RomaniseLetter_GetLetter_NullReturned(string letter, string expected)
+        {
+            var result = this._service.Romanise(letter);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        #endregion Tests
     }
 }

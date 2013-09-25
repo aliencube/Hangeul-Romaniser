@@ -1,66 +1,59 @@
-﻿using System;
+﻿using HangeulRomaniser.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace HangeulRomaniser.Services
 {
-    public class RomaniserService
+    public partial class RomaniserService : IRomaniserService
     {
         #region Constructors
-        #endregion
+
+        #endregion Constructors
 
         #region Constants
-        private const string INITIALS = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
-        private const string MEDIALS = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
-        private const string FINALS = " ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+
         private const ushort FIRST_HANGEUL_UNICODE = 0xAC00;
         private const ushort LAST_HANGEUL_UNICODE = 0xD79F;
-        #endregion
+
+        #endregion Constants
 
         #region Properties
 
-        private IList<char> _initials;
         /// <summary>
-        /// Gets the list of initials as char data type.
+        /// Gets the list of initials and their romanised as key/value pair.
         /// </summary>
-        public IList<char> Initials
+        public IList<KeyValuePair<char, string>> Initials
         {
             get
             {
-                if (this._initials == null || !this._initials.Any())
-                    this._initials = INITIALS.ToCharArray().ToList();
                 return this._initials;
             }
         }
-        private IList<char> _medials;
+
         /// <summary>
-        /// Gets the list of medials as char data type.
+        /// Gets the list of medials and their romanised as key/value pair.
         /// </summary>
-        public IList<char> Medials
+        public IList<KeyValuePair<char, string>> Medials
         {
             get
             {
-                if (this._medials == null || !this._medials.Any())
-                    this._medials = MEDIALS.ToCharArray().ToList();
                 return this._medials;
             }
         }
 
-        private IList<char> _finals;
         /// <summary>
-        /// Gets the list of finals as char data type.
+        /// Gets the list of finals and their romanised as key/value pair.
         /// </summary>
-        public IList<char> Finals
+        public IList<KeyValuePair<char, string>> Finals
         {
             get
             {
-                if (this._finals == null || !this._finals.Any())
-                    this._finals = FINALS.ToCharArray().ToList();
                 return this._finals;
             }
         }
-        #endregion
+
+        #endregion Properties
 
         #region Methods
 
@@ -73,11 +66,20 @@ namespace HangeulRomaniser.Services
         /// <returns>Returns a letter combined with initial, medial and final.</returns>
         public string Combine(string initial, string medial, string final = "")
         {
-            var indexInitial = this.Initials.IndexOf(Convert.ToChar(initial));
-            var indexMedial = this.Medials.IndexOf(Convert.ToChar(medial));
+            var indexInitial = this.Initials
+                                   .Select(p => p.Key)
+                                   .ToList()
+                                   .IndexOf(Convert.ToChar(initial));
+            var indexMedial = this.Medials
+                                  .Select(p => p.Key)
+                                  .ToList()
+                                  .IndexOf(Convert.ToChar(medial));
             var indexFinal = String.IsNullOrWhiteSpace(final)
                                  ? 0
-                                 : this.Finals.IndexOf(Convert.ToChar(final));
+                                 : this.Finals
+                                       .Select(p => p.Key)
+                                       .ToList()
+                                       .IndexOf(Convert.ToChar(final));
 
             var unicode = FIRST_HANGEUL_UNICODE + (indexInitial * 21 + indexMedial) * 28 + indexFinal;
 
@@ -86,11 +88,49 @@ namespace HangeulRomaniser.Services
         }
 
         /// <summary>
-        /// Splits a letter into initial, medial and final.
+        /// Splits the letter into initial, medial and final.
         /// </summary>
-        /// <param name="letter">Letter.</param>
+        /// <param name="letter">Letter to split.</param>
         /// <returns>Returns the initial, medial and final.</returns>
         public IList<string> Split(string letter)
+        {
+            var indices = this.GetIndices(letter);
+            if (indices == null || !indices.Any())
+                return null;
+
+            var resultInitial = Convert.ToString(this.Initials[indices[0]].Key);
+            var resultMedial = Convert.ToString(this.Medials[indices[1]].Key);
+            var resultFinal = Convert.ToString(this.Finals[indices[2]].Key).Trim();
+
+            var result = new List<string>() { resultInitial, resultMedial, resultFinal };
+            return result;
+        }
+
+        /// <summary>
+        /// Romanises the letter.
+        /// </summary>
+        /// <param name="letter">Letter to romanise.</param>
+        /// <returns>Returns the letter romanised.</returns>
+        public string Romanise(string letter)
+        {
+            var indices = this.GetIndices(letter);
+            if (indices == null || !indices.Any())
+                return null;
+
+            var resultInitial = Convert.ToString(this.Initials[indices[0]].Value);
+            var resultMedial = Convert.ToString(this.Medials[indices[1]].Value);
+            var resultFinal = Convert.ToString(this.Finals[indices[2]].Value).Trim();
+
+            var result = String.Join("", resultInitial, resultMedial, resultFinal);
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the indices for initial, medial and final.
+        /// </summary>
+        /// <param name="letter">Letter to get indices.</param>
+        /// <returns>Returns the indices.</returns>
+        private IList<int> GetIndices(string letter)
         {
             var unicode = Convert.ToUInt16(Convert.ToChar(letter));
             if (unicode < FIRST_HANGEUL_UNICODE || unicode > LAST_HANGEUL_UNICODE)
@@ -103,14 +143,10 @@ namespace HangeulRomaniser.Services
             indexUnicode = indexUnicode % 28;
             var indexFinal = indexUnicode;
 
-            var resultInitial = Convert.ToString(this.Initials[indexInitial]);
-            var resultMedial = Convert.ToString(this.Medials[indexMedial]);
-            var resultFinal = Convert.ToString(this.Finals[indexFinal]).Trim();
-
-            var result = new List<string>() {resultInitial, resultMedial, resultFinal};
+            var result = new List<int>() {indexInitial, indexMedial, indexFinal};
             return result;
         }
 
-        #endregion
+        #endregion Methods
     }
 }
