@@ -1,18 +1,17 @@
 # Hangeul Romaniser #
 
-**Hangeul Romaniser** provides a library to Romanise Korean syllables (Hangeul) based on the [Romanization of Korean][1] by [the National Institute of the Korean Language](http://www.korean.go.kr/eng_new).
+**Hangeul Romaniser** provides a library to Romanise Korean syllables (Hangeul) based on the [Romanization of Korean][romanising_en] by [the National Institute of the Korean Language][nikl_en].
 
 
-**Hangeul Romaniser**는 한글 음절들을 [국립국어원](http://www.korean.go.kr/09_new)에서 규정한 [한글 로마자 표기규정][2]에 따라 영문으로 변환해주는 라이브러리입니다.
+**Hangeul Romaniser**는 한글 음절들을 [국립국어원][nikl_ko]에서 규정한 [한글 로마자 표기규정][romanising_ko]에 따라 영문 로마자로 변환해주는 라이브러리입니다.
 
 
 
 # How It Works #
 
-The Unicode table lists all Korean syllables, initials, medials and finals in an alphabetical order ([Hangul Syllables][hangeul_syllables] and [Hangul Jamo][hangeul_jamo]). [A sort of rules (written in Korean)][rule] is applied to them and using those rules can calculate distance between an initial and a final. The distance determines a unicode of a syllable combined with given initial, medial and final and vice versa. Each character &ndash; initial, medial and final &ndash; has its corresponding Romanised equivalent, so combining those equivalent can generate a Romanised string of a Korean syllable.
+In Korean characters, a syllable consists of three phonemes &ndash; initial, medial and final. By combining these phonemes, any syllable can be generated and/or any syllable can be split into three phonemes ([Korean Word Structure and Basic Letters][korean_word_structure]). The Unicode table contains all Korean syllables and phonemes. With this table, when phonemes are given, a syllable can be found and/or vice versa ([Understanding Korean Encoding (written in Korean)][rule]). In addition to this, [Romanization of Korean][romanising_en] also determines each phoneme has its own Romanised string equivalent. Therefore, with combination of all these, any Korean syllable can be Romanised.
 
-
-유니코드 테이블에 보면 모든 한글 음절과 초성, 중성, 종성들은 가나다 순서로 되어 있습니다. ([한글음절][hangeul_syllables], [한글자모][hangeul_jamo] 참조) 또한 이 순서는 [모종의 규칙(한글)][rule]에 따라 이루어져 있고, 그 규칙을 따르면 한 음절의 초성과 종성 사이의 거리를 계산해 낼 수 있습니다. 이 방법을 이용하면 초성, 중성, 종성이 주어질 때 이들을 결합하여 해당 음절을 유니코드에서 찾아낼 수 있고, 그 반대도 가능합니다. 초성, 중성, 종성은 각각 로마자 표기규정이 있어 이들을 조합하면 하나의 음절을 로마자로 변환시킬 수 있습니다.
+한국어 글자에서 하나의 음절은 초성, 중성, 종성의 세가지 음소로 나눌 수 있습니다. 반대로 초성, 중성, 종성의 세 음소를 결합하면 하나의 음절을 만들 수 있습니다. ([한국어 음절 구조 (영문)][korean_word_structure] 참조). 유니코드 테이블은 한국어에서 사용 가능한 모든 음절과, 음소들을 포함하고 있고, [이 원리][rule]를 이용하면 초성, 중성, 종성이 주어질 때 해당하는 음절을 찾을 수 있고, 그 반대로 음절에서 음소로 분리도 가능합니다. 각각의 음소는 [한글 로마자 표기규정][romanising_ko]을 따라 해당하는 영문 로마자들이 있으므로 이를 이용한다면 어떤 한글 단어 혹은 음절이 주어질 때 이를 영문 로마자로 변환시킬 수 있습니다.
 
 
 
@@ -81,8 +80,11 @@ The Unicode table lists all Korean syllables, initials, medials and finals in an
 > **이 소프트웨어는 상품성, 특정 목적 적합성, 그리고 비침해에 대한 보증을 포함한 어떠한 형태의 보증도 명시적이나 묵시적으로 설정되지 않은 “있는 그대로의” 상태로 제공된다. 소프트웨어를 개발한 프로그래머나 저작권자는 어떠한 경우에도 소프트웨어나 소프트웨어의 사용 등의 행위와 관련하여 일어나는 어떤 요구사항이나 손해 및 기타 책임에 대해 계약상, 불법행위 또는 기타 이유로 인한 책임을 지지 않는다.**
 
 
-[1]: http://www.korean.go.kr/eng_new/document/roman/roman_01.jsp
-[2]: http://www.korean.go.kr/09_new/dic/rule/rule_roman_0101.jsp
+[romanising_en]: http://www.korean.go.kr/eng_new/document/roman/roman_01.jsp
+[romanising_ko]: http://www.korean.go.kr/09_new/dic/rule/rule_roman_0101.jsp
+[nikl_en]: http://www.korean.go.kr/eng_new
+[nikl_ko]: http://www.korean.go.kr/09_new
+[korean_word_structure]: http://www.howtostudykorean.com/unit0/unit0lesson1
 [hangeul_syllables]: http://www.unicode.org/charts/PDF/UAC00.pdf
 [hangeul_jamo]: http://www.unicode.org/charts/PDF/U1100.pdf
 [rule]: http://helloworld.naver.com/helloworld/76650
